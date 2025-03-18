@@ -1,0 +1,38 @@
+{
+  "name": "mcp-google-calendar",
+  "version": "0.0.1",
+  "description": "MCP server for interacting with Google Calendar",
+  "license": "MIT",
+  "author": "am2rican5",
+  "homepage": "https://github.com/am2rican5/mcp-google-calendar",
+  "module": "src/index.ts",
+  "type": "module",
+  "bin": {
+    "mcp-google-calendar": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run build:sse && npm run build:stdio",
+    "build:sse": "bun build src/sse.ts --target=node --outfile=dist/sse.js",
+    "build:stdio": "bun build src/index.ts --target=node --outfile=dist/index.js",
+    "start:sse": "bun run dist/sse.js",
+    "start:stdio": "bun run dist/index.js",
+    "watch:stdio": "bun --watch src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "googleapis": "^146.0.0"
+  }
+}
