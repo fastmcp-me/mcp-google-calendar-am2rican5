@@ -1,6 +1,6 @@
 {
   "name": "mcp-google-calendar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "MCP server for interacting with Google Calendar",
   "license": "MIT",
   "author": "am2rican5",
@@ -20,16 +20,15 @@
     "dist"
   ],
   "scripts": {
-    "build": "npm run build:sse && npm run build:stdio",
-    "build:sse": "bun build src/sse.ts --target=node --outfile=dist/sse.js",
-    "build:stdio": "bun build src/index.ts --target=node --outfile=dist/index.js",
-    "start:sse": "bun run dist/sse.js",
-    "start:stdio": "bun run dist/index.js",
-    "watch:stdio": "bun --watch src/index.ts"
+    "build": "tsc && shx chmod +x dist/*.js",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js",
+    "start:sse": "node dist/sse.js"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "shx": "^0.4.0"
   },
   "peerDependencies": {
     "typescript": "^5.8.2"

@@ -12,7 +12,7 @@ A calendar service built with TypeScript and the Model Context Protocol (MCP) SD
 
 ## Prerequisites
 
-1. Node.js and Bun installed
+1. Node.js installed
 2. Google Cloud Platform account
 3. Google Calendar API enabled
 4. OAuth 2.0 credentials
@@ -27,7 +27,7 @@ A calendar service built with TypeScript and the Model Context Protocol (MCP) SD
 
 2. Install dependencies:
    ```bash
-   bun install
+   npm install
    ```
 
 3. Set up Google Calendar API:
@@ -79,7 +79,7 @@ A calendar service built with TypeScript and the Model Context Protocol (MCP) SD
 
 2. Start the server:
    ```bash
-   bun start
+   npx -y mcp-google-calendar
    ```
 
 3. Authentication Process:
@@ -89,12 +89,6 @@ A calendar service built with TypeScript and the Model Context Protocol (MCP) SD
    - On subsequent runs, the server will automatically use the saved token without launching the browser
    - If authentication fails, the server will exit with an error message
 
-## Running the Test Client
-
-```bash
-export CREDENTIALS_PATH=/path/to/your/credentials.json
-bun run test-client
-```
 
 The first time you run the client, it will:
 1. Open a browser window for Google authentication
@@ -125,11 +119,9 @@ The application uses a persistent token storage system:
 
 ## Development
 
-This project uses [Bun](https://bun.sh) as the JavaScript runtime.
-
 To build the project:
 ```bash
-bun run build
+npm run build
 ```
 
 ## Security Considerations
