@@ -1,10 +1,16 @@
 {
   "name": "mcp-google-calendar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MCP server for interacting with Google Calendar",
   "license": "MIT",
   "author": "am2rican5",
   "homepage": "https://github.com/am2rican5/mcp-google-calendar",
+  "keywords": [
+    "mcp",
+    "google",
+    "calendar",
+    "typescript"
+  ],
   "module": "src/index.ts",
   "type": "module",
   "bin": {
