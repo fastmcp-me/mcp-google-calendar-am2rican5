@@ -31,7 +31,13 @@ export class GoogleCalendarService {
 	private static instance: GoogleCalendarService;
 	private authClient: OAuth2Client | null = null;
 	private credentials: Credentials | null = null;
-	private readonly TOKEN_PATH = path.join(process.cwd(), "token.json");
+
+	private readonly CREDENTIALS_PATH =
+		process.env.CREDENTIALS_PATH ?? "./credentials.json";
+	private readonly TOKEN_PATH = path.join(
+		path.dirname(this.CREDENTIALS_PATH),
+		"mcp-google-calendar-token.json",
+	);
 
 	// Scopes for Google Calendar API
 	private readonly SCOPES = [
@@ -55,18 +61,15 @@ export class GoogleCalendarService {
 	 * Load credentials from environment variable
 	 */
 	private loadCredentials(): GoogleCredentials {
-		const credentialsPath =
-			process.env.CREDENTIALS_PATH ?? "./credentials.json";
-
-		if (!credentialsPath) {
+		if (!this.CREDENTIALS_PATH) {
 			throw new Error("CREDENTIALS_PATH environment variable is not set");
 		}
 
-		if (!fs.existsSync(credentialsPath)) {
-			throw new Error(`Credentials file not found at ${credentialsPath}`);
+		if (!fs.existsSync(this.CREDENTIALS_PATH)) {
+			throw new Error(`Credentials file not found at ${this.CREDENTIALS_PATH}`);
 		}
 
-		const content = fs.readFileSync(credentialsPath, "utf8");
+		const content = fs.readFileSync(this.CREDENTIALS_PATH, "utf8");
 		return JSON.parse(content) as GoogleCredentials;
 	}
 
@@ -108,16 +111,15 @@ export class GoogleCalendarService {
 
 		try {
 			// Load credentials from environment variable
-			const credentialsPath =
-				process.env.CREDENTIALS_PATH ?? "./credentials.json";
-
-			if (!fs.existsSync(credentialsPath)) {
-				throw new Error(`Credentials file not found at: ${credentialsPath}`);
+			if (!fs.existsSync(this.CREDENTIALS_PATH)) {
+				throw new Error(
+					`Credentials file not found at: ${this.CREDENTIALS_PATH}`,
+				);
 			}
 
 			// Load credentials from file
 			const credentials: GoogleCredentials = JSON.parse(
-				fs.readFileSync(credentialsPath, "utf-8"),
+				fs.readFileSync(this.CREDENTIALS_PATH, "utf-8"),
 			);
 
 			// Extract client ID and secret
@@ -150,7 +152,7 @@ export class GoogleCalendarService {
 			console.log("No saved token found. Starting new authentication flow...");
 			this.authClient = (await authenticate({
 				scopes: this.SCOPES,
-				keyfilePath: credentialsPath,
+				keyfilePath: this.CREDENTIALS_PATH,
 			})) as OAuth2Client;
 
 			// Store credentials in memory and save to disk

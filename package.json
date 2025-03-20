@@ -1,6 +1,6 @@
 {
   "name": "mcp-google-calendar",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "MCP server for interacting with Google Calendar",
   "license": "MIT",
   "author": "am2rican5",
@@ -24,7 +24,7 @@
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "start": "node dist/index.js",
-    "start:sse": "node dist/sse.js"
+    "start:sse": "node dist/index.js --sse"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
