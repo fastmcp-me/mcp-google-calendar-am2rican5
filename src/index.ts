@@ -46,18 +46,13 @@ async function startSSEServer() {
 	try {
 		// Get calendar service instance and authenticate
 		const calendarService = GoogleCalendarService.getInstance();
-		console.log("Authenticating with Google Calendar...");
 		await calendarService.authorize();
-		console.log("Authentication successful!");
 
 		// Start the server after successful authentication
 		const PORT = process.env.PORT
 			? Number.parseInt(process.env.PORT, 10)
 			: 3420;
-		app.listen(PORT, () => {
-			console.log(`Calendar Service running on port ${PORT}`);
-			console.log(`SSE endpoint available at http://localhost:${PORT}/sse`);
-		});
+		app.listen(PORT);
 	} catch (error) {
 		console.error("Authentication failed:", error);
 		process.exit(1);

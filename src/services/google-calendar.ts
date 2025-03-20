@@ -142,14 +142,12 @@ export class GoogleCalendarService {
 			// Try to load saved token
 			const savedToken = this.loadSavedToken();
 			if (savedToken) {
-				console.log("Using saved token");
 				this.credentials = savedToken;
 				this.authClient.setCredentials(savedToken);
 				return this.authClient;
 			}
 
 			// If no saved token, start new authentication flow
-			console.log("No saved token found. Starting new authentication flow...");
 			this.authClient = (await authenticate({
 				scopes: this.SCOPES,
 				keyfilePath: this.CREDENTIALS_PATH,

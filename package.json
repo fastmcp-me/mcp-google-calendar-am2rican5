@@ -1,6 +1,6 @@
 {
   "name": "mcp-google-calendar",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "MCP server for interacting with Google Calendar",
   "license": "MIT",
   "author": "am2rican5",
