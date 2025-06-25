@@ -14,6 +14,8 @@ COPY src/ ./src/
 # Install all dependencies (including dev dependencies for building)
 RUN npm ci
 
+# Build the TypeScript source code into JavaScript
+RUN npm run build
 # Remove dev dependencies to reduce image size
 RUN npm prune --omit=dev
 
