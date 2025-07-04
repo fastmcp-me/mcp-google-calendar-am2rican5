@@ -191,7 +191,6 @@ export class GoogleCalendarService {
 		if (startDate === endDate) {
 			endDate = endDate + "T23:59:59";
 		}
-		console.log(startDate + "-" + endDate);
 		const res = await calendar.events.list({
 			calendarId,
 			timeMin: new Date(startDate).toISOString(),
